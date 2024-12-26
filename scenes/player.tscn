@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnn84y70mwqtg"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_1b7re"]
+[ext_resource type="Texture2D" uid="uid://cvqm4ecywpvdc" path="res://assets/tappyplane/PNG/Planes/planeGreen1.png" id="1_kba7s"]
+[ext_resource type="Texture2D" uid="uid://bnnv6l2066n8p" path="res://assets/tappyplane/PNG/Planes/planeGreen2.png" id="2_xhp4f"]
+[ext_resource type="Texture2D" uid="uid://dbxvhwrivtvir" path="res://assets/tappyplane/PNG/Planes/planeGreen3.png" id="3_nkqrs"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y0fvs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kba7s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xhp4f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nkqrs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0r8xx"]
+radius = 8.0
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_1b7re")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_y0fvs")
+frame_progress = 0.714582
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0r8xx")

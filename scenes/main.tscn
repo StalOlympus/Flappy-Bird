@@ -1,0 +1,138 @@
+[gd_scene load_steps=29 format=3 uid="uid://dwewqtlivwe1r"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_ujvi8"]
+[ext_resource type="Texture2D" uid="uid://daw6g4loutts2" path="res://assets/tappyplane/PNG/groundRock.png" id="2_0unyt"]
+[ext_resource type="PackedScene" uid="uid://cnn84y70mwqtg" path="res://scenes/player.tscn" id="2_852cr"]
+[ext_resource type="Script" path="res://scripts/ui.gd" id="2_not2g"]
+[ext_resource type="Script" path="res://scripts/obstacle_spawner.gd" id="3_7ocg0"]
+[ext_resource type="PackedScene" uid="uid://n7khdvfowu18" path="res://scenes/bottom_obstacle.tscn" id="4_6xuew"]
+[ext_resource type="Texture2D" uid="uid://dk1q8n8eeo855" path="res://assets/tappyplane/PNG/background.png" id="4_nm4n4"]
+[ext_resource type="PackedScene" uid="uid://j6jvxogcnk7r" path="res://scenes/top_obstacle.tscn" id="5_yctqm"]
+[ext_resource type="Script" path="res://scripts/obstacle_variation.gd" id="6_apc5j"]
+[ext_resource type="Texture2D" uid="uid://kbt6jnmw7uln" path="res://assets/tappyplane/PNG/rock.png" id="7_3vm5n"]
+[ext_resource type="Texture2D" uid="uid://crrba22l5dnnc" path="res://assets/tappyplane/PNG/rockGrass.png" id="8_wvvwe"]
+[ext_resource type="Texture2D" uid="uid://wfohsuwdoljj" path="res://assets/tappyplane/PNG/rockIce.png" id="9_auchl"]
+[ext_resource type="Texture2D" uid="uid://c0ekkokknxj51" path="res://assets/tappyplane/PNG/rockSnow.png" id="10_grt2i"]
+[ext_resource type="Texture2D" uid="uid://c5r3hqbw1b6rx" path="res://assets/tappyplane/PNG/rockDown.png" id="11_c7c8i"]
+[ext_resource type="Texture2D" uid="uid://bvcjmgaycu7a4" path="res://assets/tappyplane/PNG/rockGrassDown.png" id="12_hqlt1"]
+[ext_resource type="Texture2D" uid="uid://od8aknkusae2" path="res://assets/tappyplane/PNG/rockIceDown.png" id="13_7uvc8"]
+[ext_resource type="Texture2D" uid="uid://bruxwbvdm6lm3" path="res://assets/tappyplane/PNG/rockSnowDown.png" id="14_3kw4n"]
+[ext_resource type="Script" path="res://scripts/obstacle.gd" id="17_koxrq"]
+
+[sub_resource type="Resource" id="Resource_r5tdh"]
+script = ExtResource("6_apc5j")
+sprite_texture = ExtResource("11_c7c8i")
+speed = 200.0
+
+[sub_resource type="Resource" id="Resource_xjmje"]
+script = ExtResource("6_apc5j")
+sprite_texture = ExtResource("12_hqlt1")
+speed = 200.0
+
+[sub_resource type="Resource" id="Resource_jkipe"]
+script = ExtResource("6_apc5j")
+sprite_texture = ExtResource("13_7uvc8")
+speed = 200.0
+
+[sub_resource type="Resource" id="Resource_ijd5v"]
+script = ExtResource("6_apc5j")
+sprite_texture = ExtResource("14_3kw4n")
+speed = 200.0
+
+[sub_resource type="Resource" id="Resource_wxv30"]
+script = ExtResource("6_apc5j")
+sprite_texture = ExtResource("7_3vm5n")
+speed = 200.0
+
+[sub_resource type="Resource" id="Resource_jvaoi"]
+script = ExtResource("6_apc5j")
+sprite_texture = ExtResource("8_wvvwe")
+speed = 200.0
+
+[sub_resource type="Resource" id="Resource_h41ik"]
+script = ExtResource("6_apc5j")
+sprite_texture = ExtResource("9_auchl")
+speed = 200.0
+
+[sub_resource type="Resource" id="Resource_4k4ah"]
+script = ExtResource("6_apc5j")
+sprite_texture = ExtResource("10_grt2i")
+speed = 200.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_a6m6k"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ny2k3"]
+
+[node name="Main" type="Node" node_paths=PackedStringArray("obstacle_spawner")]
+script = ExtResource("1_ujvi8")
+obstacle_spawner = NodePath("ObstacleSpawner")
+
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("score_label")]
+script = ExtResource("2_not2g")
+score_label = NodePath("MarginContainer/PanelContainer/ScoreLabel")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 8
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="ScoreLabel" type="Label" parent="UI/MarginContainer/PanelContainer"]
+layout_mode = 2
+text = "100"
+
+[node name="Backgrounds" type="Node2D" parent="."]
+
+[node name="Background" type="Parallax2D" parent="Backgrounds"]
+repeat_size = Vector2(800, 0)
+autoscroll = Vector2(-50, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Background"]
+position = Vector2(320, 180)
+texture = ExtResource("4_nm4n4")
+
+[node name="Ground" type="Parallax2D" parent="Backgrounds"]
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(-100, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Ground"]
+position = Vector2(320, 328)
+scale = Vector2(0.792079, 1)
+texture = ExtResource("2_0unyt")
+
+[node name="ObstacleSpawner" type="Node2D" parent="."]
+script = ExtResource("3_7ocg0")
+top_obstacle_scene = ExtResource("5_yctqm")
+bottom_obstacle_scene = ExtResource("4_6xuew")
+spawn_position_x = 740.0
+min_height = -80.0
+max_height = 80.0
+top_obstacle_variations = Array[ExtResource("6_apc5j")]([SubResource("Resource_r5tdh"), SubResource("Resource_xjmje"), SubResource("Resource_jkipe"), SubResource("Resource_ijd5v")])
+bottom_obstacle_variations = Array[ExtResource("6_apc5j")]([SubResource("Resource_wxv30"), SubResource("Resource_jvaoi"), SubResource("Resource_h41ik"), SubResource("Resource_4k4ah")])
+
+[node name="Player" parent="." instance=ExtResource("2_852cr")]
+position = Vector2(168, 180)
+collision_mask = 4
+
+[node name="Ceiling" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+shape = SubResource("WorldBoundaryShape2D_a6m6k")
+
+[node name="Floor" type="Area2D" parent="."]
+position = Vector2(0, 364)
+script = ExtResource("17_koxrq")
+speed = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape2D_ny2k3")

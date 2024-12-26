@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://j6jvxogcnk7r"]
+
+[ext_resource type="Script" path="res://scripts/obstacle.gd" id="1_y2t0b"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_afrfx"]
+load_path = "res://.godot/imported/rockDown.png-752d5bed624496ee455bb863ec50a642.ctex"
+
+[node name="TopObstacle" type="Area2D" node_paths=PackedStringArray("sprite") groups=["obstacles"]]
+collision_layer = 2
+script = ExtResource("1_y2t0b")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.18519, 1.07113)
+texture = SubResource("CompressedTexture2D_afrfx")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-64, -128, 16, 128, 64, -128)

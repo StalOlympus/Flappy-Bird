@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://n7khdvfowu18"]
+
+[ext_resource type="Script" path="res://scripts/obstacle.gd" id="1_kqurk"]
+[ext_resource type="Texture2D" uid="uid://kbt6jnmw7uln" path="res://assets/tappyplane/PNG/rock.png" id="2_r7mbf"]
+
+[node name="BottomObstacle" type="Area2D" node_paths=PackedStringArray("sprite") groups=["obstacles"]]
+collision_layer = 2
+script = ExtResource("1_kqurk")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.18519, 1.07113)
+texture = ExtResource("2_r7mbf")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(66, 127, 14, -129, -64, 128)
